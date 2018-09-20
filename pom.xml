@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>shiro.demo</groupId>
-	<artifactId>shiro.demo</artifactId>
+	<groupId>sino.demo</groupId>
+	<artifactId>sino.demo</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>www.sojson.com</name>
+	<name>www.arcgis.com</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
