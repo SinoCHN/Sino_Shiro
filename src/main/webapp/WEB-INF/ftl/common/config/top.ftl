@@ -63,7 +63,21 @@
 						</ul>
 					</li>	
 				</@shiro.hasAnyRoles>    
-				<li>
+				
+					<#--拥有 角色888888（管理员） ||  100005（地图查看）-->
+				<@shiro.hasAnyRoles name='888888,100005'>          
+				<li class="dropdown ${(index==4)?string('active','')}">
+					<a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="${basePath}/member/list.shtml">
+						地图查看<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<@shiro.hasPermission name="/demo/index.shtml">
+							<li><a href="${basePath}/demo/index.shtml">ArcGIS MAP</a></li>
+						</@shiro.hasPermission>
+					</ul>
+				</li>	
+				</@shiro.hasAnyRoles>     
+				<#--<li>
 					<a class="dropdown-toggle" target="_blank" href="http://www.sojson.com/tag_shiro.html" target="_blank">
 						Shiro相关博客<span class="collapsing"></span>
 					</a>
@@ -77,10 +91,10 @@
 					<a class="dropdown-toggle" href="http://www.sojson.com/jc/shiro.html" target="_blank">
 						Shiro Demo 其他版本<span class="collapsing"></span>
 					</a>
-				</li>	          
+				</li>-->	          
 	          </ul>
 	           <ul class="nav navbar-nav  pull-right" >
-				<li class="dropdown ${(index==10)?string('active','')}" style="color:#fff;">
+				<li class="dropdown ${(index==5)?string('active','')}" style="color:#fff;">
 					<a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown"  
 						<@shiro.user>  
 							onclick="location.href='${basePath}/user/index.shtml'" href="${basePath}/user/index.shtml" class="dropdown-toggle qqlogin" >

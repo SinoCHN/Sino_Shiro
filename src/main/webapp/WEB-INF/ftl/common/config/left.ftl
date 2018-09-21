@@ -1,6 +1,6 @@
 <#macro user index>
 <div id="one" class="col-md-2">
-	<ul data-spy="affix" class="nav nav-list nav-tabs nav-stacked bs-docs-sidenav dropdown affix" style="top: 100px; z-index: 100;">
+	<ul data-spy="affix" class="nav nav-list nav-tabs nav-stacked bs-docs-sidenav dropdown affix" style="top: 100px;left:10px; z-index: 100;">
 	  <li class="${(index==1)?string('active',' ')}">
 	      <a href="${basePath}/user/index.shtml">
 	    	 <i class="glyphicon glyphicon-chevron-right"></i>个人资料
