@@ -65,9 +65,9 @@
 				</@shiro.hasAnyRoles>    
 				
 					<#--拥有 角色888888（管理员） ||  100005（地图查看）-->
-				<@shiro.hasAnyRoles name='888888,100004'>          
+				<@shiro.hasAnyRoles name='888888,100002'>          
 				<li class="dropdown ${(index==4)?string('active','')}">
-					<a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle" href="${basePath}/member/list.shtml">
+					<a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle"  href="${basePath}/arcgis/index.shtml">
 						ArcGIS地图<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
