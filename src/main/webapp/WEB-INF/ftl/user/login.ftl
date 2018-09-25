@@ -33,7 +33,7 @@
                 <label><input type="checkbox" checked="checked"  id="rememberMe"style="width: 15px; height: 15px;">记住我</label>
                 </div>
                 <button type="button" id="login">登录</button>
-                <button type="button" id="register" class="register">Register</button>
+                <button type="button" id="register" class="register">注册</button>
                 <div class="connect" >
 	                <p>
 	                    <a class="" style="width: 357px; color: rgb(255, 255, 255);" >Copyright © 2014 - 2019  兰州白塔山搭白石 </a>
