@@ -12,7 +12,7 @@
 	  </li>
 	  <li class="${(index==2)?string('active',' ')} dropdown">
 	      <a href="${basePath}/role/mypermission.shtml">
-	    	 <i class="glyphicon glyphicon-chevron-right"></i>我的权限
+	    	 <i class="glyphicon glyphicon-education"></i>我的权限
 	      </a>
 	  </li>
 	</ul>

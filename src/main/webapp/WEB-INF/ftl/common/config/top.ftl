@@ -64,19 +64,22 @@
 					</li>	
 				</@shiro.hasAnyRoles>    
 				
-					<#--拥有 角色888888（管理员） ||  100005（地图查看）-->
-				<@shiro.hasAnyRoles name='888888,100002'>          
+					<#--拥有 角色888888（管理员） ||  100004（地图查看）-->
+				<@shiro.hasAnyRoles name='888888,100006'>          
 				<li class="dropdown ${(index==4)?string('active','')}">
-					<a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle"  href="${basePath}/arcgis/index.shtml">
-						ArcGIS地图<span class="caret"></span>
+					<a aria-expanded="false" aria-haspopup="true"  role="button" data-toggle="dropdown" class="dropdown-toggle"  href="${basePath}/permission/index.shtml">
+						人口地图展示<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
+						<@shiro.hasPermission name="/demo/index.shtml">
+							<li><a href="${basePath}/demo/index.shtml">人口地图展示</a></li>
+						</@shiro.hasPermission>
 						<@shiro.hasPermission name="/arcgis/index.shtml">
-							<li><a href="${basePath}/arcgis/index.shtml">ArcGIS 3D MAP</a></li>
+							<li><a href="${basePath}/arcgis/index.shtml">人口地图展示1</a></li>
 						</@shiro.hasPermission>
 					</ul>
 				</li>	
-				</@shiro.hasAnyRoles>     
+				</@shiro.hasAnyRoles>    
 				<#--<li>
 					<a class="dropdown-toggle" target="_blank" href="http://www.sojson.com/tag_shiro.html" target="_blank">
 						Shiro相关博客<span class="collapsing"></span>

@@ -116,6 +116,7 @@ public class PermissionServiceImpl extends BaseMybatisDao<UPermissionMapper> imp
 
 	@Override
 	public List<UPermissionBo> selectPermissionById(Long id) {
+		
 		return permissionMapper.selectPermissionById(id);
 	}
 
