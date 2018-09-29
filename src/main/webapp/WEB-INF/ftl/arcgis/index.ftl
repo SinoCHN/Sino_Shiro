@@ -9,13 +9,12 @@
 		<link href="${basePath}/js/common/bootstrap/3.3.5/css/bootstrap.min.css?${_v}" rel="stylesheet"/>
 		<link href="${basePath}/css/common/base.css?${_v}" rel="stylesheet"/>
 		<link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
-		<link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/themes/dark/main.css">
 
 		<script  src="${basePath}/js/common/jquery/jquery1.8.3.min.js"></script>
 		<script  src="${basePath}/js/common/layer/layer.js"></script>
 		<script  src="${basePath}/js/common/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  		 <script src="https://js.arcgis.com/4.8/"></script>
-		 <style>
+<style>
     html,
     body,
     #viewDiv {
@@ -23,55 +22,129 @@
       margin: 0;
       height: 100%;
       width: 100%;
-      overflow: hidden;
     }
+
+    #controls {
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
   </style>
 
-  <script>
-    var dojoConfig = {
-      has: {
-        "esri-featurelayer-webgl": 1
-      }
-    };
-  </script>
- <script>
+
+   <script>
     require([
-      "esri/WebMap",
-      "esri/views/MapView",
-      "esri/widgets/LayerList",
+      "esri/WebScene",
+      "esri/views/SceneView",
+      "esri/layers/SceneLayer",
+      "esri/widgets/Legend",
       "dojo/domReady!"
-    ], function(
-      WebMap, MapView, LayerList
-    ) {
+    ], function(WebScene, SceneView, SceneLayer, Legend) {
 
-      const map = new WebMap({
+      var solidEdges = {
+        type: "solid",
+        color: [0, 0, 0, 0.6],
+        size: 1
+      };
+
+      var sketchEdges = {
+        type: "sketch",
+        color: [0, 0, 0, 0.8],
+        size: 1,
+        extensionLength: 10
+      };
+
+      // Create the renderer and configure visual variables
+      var renderer = {
+        type: "simple", // autocasts as new SimpleRenderer()
+        symbol: {
+          type: "mesh-3d",
+          symbolLayers: [{
+            type: "fill",
+            material: {
+              color: "#ffffff",
+              colorMixMode: "replace"
+            },
+            edges: solidEdges
+          }]
+        },
+        visualVariables: [{
+          // specifies a visual variable of continuous color
+          type: "color",
+          // based on a field indicating the walking time to public transport
+          field: "walkTimeToStopsInService",
+          legendOptions: {
+            title: "Walking time to public transport"
+          },
+          // color ramp from white to blue
+          // based on the walking time to public transport.
+          // Buildings will be assigned a color proportional
+          // to the min and max colors specified below
+          stops: [{
+              value: 1,
+              color: "#2887a1",
+              label: "less than 1 minute"
+            },
+            {
+              value: 15,
+              color: "#ffffff",
+              label: "more than 15 minutes"
+            }
+          ]
+        }]
+      };
+
+      var sceneLayer = new SceneLayer({
         portalItem: {
-          id: "d5dda743788a4b0688fe48f43ae7beb9"
-        }
+          id: "f5c497819a374941b0ce8d9b0e979819"
+        },
+        title: "San Francisco buildings",
+        renderer: renderer // Set the renderer to sceneLayer
       });
 
-      // Add the map to a MapView
-      const view = new MapView({
+      var webscene = new WebScene({
+        portalItem: {
+          id: "12d629fc946845628011f17a963373a9"
+        },
+        layers: [ sceneLayer ]
+      });
+
+      var view = new SceneView({
         container: "viewDiv",
-        map: map
+        map: webscene
       });
 
-      // Add a legend instance to the panel of a
-      // ListItem in a LayerList instance
-      const layerList = new LayerList({
-        view: view,
-        listItemCreatedFunction: function(event) {
-          const item = event.item;
-          item.panel = {
-            content: "legend",
-            open: true
-          };
+      var legend = new Legend({
+        view: view
+      });
+      view.ui.add(legend, "bottom-right");
+
+      // Add a toggle button for the edges
+
+      document.getElementById("controls").addEventListener("click", function(event) {
+        var edges;
+
+        if (event.target.id === "sketchEdges") {
+          edges = sketchEdges;
+        }
+        else if (event.target.id === "solidEdges") {
+          edges = solidEdges;
+        }
+        else if (event.target.id === "noEdges") {
+          edges = null;
+        }
+        if (event.target.checked) {
+          var renderer = sceneLayer.renderer.clone();
+          renderer.symbol.symbolLayers.getItemAt(0).edges = edges;
+          sceneLayer.renderer = renderer;
         }
       });
-      view.ui.add(layerList, "top-right");
 
+      view.ui.add(document.getElementById("controls"), "top-right");
     });
+
   </script>
+
 
 	</head>
 	<body data-target="#one" data-spy="scroll">
@@ -79,6 +152,14 @@
 		<div class="container" id="viewDiv"  style="padding-bottom: 15px;min-height: 300px; margin-top: 40px">
 			<#--/row-->
 		</div>
+		<div id="controls">
+    <input type="radio" id="solidEdges" name="edges" checked> <label for="solidEdges">Solid
+      edges</label>
+    <input type="radio" id="sketchEdges" name="edges"> <label for="sketchEdges">Sketch
+      edges</label>
+    <input type="radio" id="noEdges" name="edges"><label for="noEdges">No edges</label>
+  </div>
+
 			
 	</body>
 </html>

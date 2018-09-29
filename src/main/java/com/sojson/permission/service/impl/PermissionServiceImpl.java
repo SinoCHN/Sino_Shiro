@@ -86,15 +86,16 @@ public class PermissionServiceImpl extends BaseMybatisDao<UPermissionMapper> imp
 				
 				List<URolePermission> rolePermissions= rolePermissionMapper.findRolePermissionByPid(id);
 				if(null != rolePermissions && rolePermissions.size() > 0){
-					successCount += rolePermissions.size();
+					 errorCount+= rolePermissions.size();
 				}else{
-					errorCount+=this.deleteByPrimaryKey(id);
+					successCount+=permissionMapper.deleteByPrimaryKey(id);
 				}
 			}
 			resultMap.put("status", 200);
 			//如果有成功的，也有失败的，提示清楚。
 			if(errorCount > 0){
-				resultMsg = String.format(resultMsg, successCount,errorCount);
+				//resultMsg = String.format(resultMsg, successCount,errorCount);
+				resultMsg="此权限已分配给角色，请先在角色中删除此权限";
 			}else{
 				resultMsg = "操作成功";
 			}

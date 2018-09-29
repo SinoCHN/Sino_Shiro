@@ -96,11 +96,19 @@
     delete from u_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.common.model.UUser" >
+   <!-- <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.common.model.UUser" >
     insert into u_user (id, nickname, email, 
       pswd, create_time, last_login_time,status
       )
     values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{pswd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP},#{status,jdbcType=BIGINT}
+      )
+  </insert>-->
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.common.model.UUser" >
+    insert into u_user (nickname, email, 
+      pswd, create_time, last_login_time,status
+      )
+    values ( #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{pswd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP},#{status,jdbcType=BIGINT}
       )
   </insert>
