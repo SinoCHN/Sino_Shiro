@@ -8,11 +8,11 @@
 		<link   rel="shortcut icon" href="${basePath}/favicon.ico" />
 		<link href="${basePath}/js/common/bootstrap/3.3.5/css/bootstrap.min.css?${_v}" rel="stylesheet"/>
 		<link href="${basePath}/css/common/base.css?${_v}" rel="stylesheet"/>
-		<link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
+		<link rel="stylesheet" href="${basePath}/esri/css/main.css">
 		<script  src="${basePath}/js/common/jquery/jquery1.8.3.min.js"></script>
 		<script  src="${basePath}/js/common/layer/layer.js"></script>
 		<script  src="${basePath}/js/common/bootstrap/3.3.5/js/bootstrap.min.js"></script>
- 		 <script src="https://js.arcgis.com/4.8/"></script>
+ 		 <script src="${basePath}/esri/js/dojo.js"></script>
 		 <style>
 		    html,
 		    body,

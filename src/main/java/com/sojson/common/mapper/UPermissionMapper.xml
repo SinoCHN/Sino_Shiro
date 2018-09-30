@@ -54,10 +54,10 @@
 		left join (select id from u_role where id = #{id,jdbcType=BIGINT}) ur on ur.id = urp.rid
 		group by up.id
   	 -->
-		select up.id,ur.id roleId,up.name,up.url,ifnull(ur.id,0)marker from u_permission up
+		select up.id,ur.id roleId,up.name,up.url,COALESCE(ur.id,0)marker from u_permission up
 		left join u_role_permission urp on urp.pid = up.id
 		left join (select id from u_role where id = #{id,jdbcType=BIGINT}) ur on ur.id = urp.rid
-		group by up.id
+		group by up.id,ur.id
   </select>
   <!-- 根据用ID查询permission -->
   <select id="findPermissionByUserId" resultType="java.lang.String">
@@ -77,8 +77,8 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.common.model.UPermission" >
-    insert into u_permission (id, url, name)
-    values (#{id,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+    insert into u_permission ( url, name)
+    values (#{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.common.model.UPermission" >
     insert into u_permission

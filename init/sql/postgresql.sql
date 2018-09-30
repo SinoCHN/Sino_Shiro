@@ -45,3 +45,10 @@ CREATE TABLE u_user_role (
   rid bigint DEFAULT NULL 
 )
 insert  into u_user_role(uid,rid) values (12,4),(11,3),(11,4),(1,1);
+
+
+/*Postgresql 没有group_concat聚合函数*/
+CREATE AGGREGATE group_concat(anyelement)(sfunc = array_append,stype = anyarray, initcond = '{}')
+
+/*设置主键自增*/
+alter table u_permission alter column id set default nextval('u_permission_id_seq');
